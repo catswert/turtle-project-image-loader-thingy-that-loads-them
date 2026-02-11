@@ -11,8 +11,8 @@ PIXELS = W * H #find total pixels in an image
 
 
 #code to load the csv file data
-BASE = os.path.dirname(os.path.abspath(__file__))
-CSV_PATH = os.path.join(BASE, "all_frames.csv")
+BASE = os.path.dirname(os.path.abspath(__file__)) #finds the directory of the current file, so it can find the csv file even if the program is run from a different location
+CSV_PATH = os.path.join(BASE, "all_frames.csv") #finds csv file named all_frames.csv
 
 with open(CSV_PATH, newline="") as f:
     data = [row[0].strip() for row in csv.reader(f) if row] #data list that contains hex code colors from csv
