@@ -35,31 +35,32 @@ x_left = -(W * S) / 2 #left edge
 y_top  =  (H * S) / 2 #top edge
 
 frame = 0 
-stamp_ids = []  # store stamp ids so we can delete them safely
+stamp_id = []  # store stamp ids so we can delete them safely
 
 def draw_frame(): #method that makes each frame (rember def is like method in java)
-    global frame, stamp_ids #make these global variavles
+    global frame, stamp_id #make these global variavles
 
     # delete previous stamps (more reliable than clearstamps in some builds)
-    for sid in stamp_ids: #stamp delete loop
+    for j in stamp_id: #stamp delete loop
         try: #try used for stable, if it always did it might get confused and try to kill a stapm stwice, but that would be bad
-            renderer.clearstamp(sid)
+            renderer.clearstamp(j)
         except Exception: #if it doesnt work jsut ignore it
             pass
-    stamp_ids = [] #reset tge list each frame
+    stamp_id = [] #reset tge list each frame
 
     base = frame * PIXELS #find the starting pixel in case its a gif so it has pixels for much frames
 
     for p in range(PIXELS): #loop to iterate each pixel
         col = p % W # find the column and
         row = p // W # find row
+        print (p)
 
         x = x_left + col * S + S / 2 
         y = y_top  - row * S - S / 2 
 
         renderer.goto(x, y) #move to tge next spot
         renderer.color(data[base + p]) #get the pixel color based on the csv
-        stamp_ids.append(renderer.stamp()) 
+        stamp_id.append(renderer.stamp()) 
 
     wn.update() #redo screen
 
